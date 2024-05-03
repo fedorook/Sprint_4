@@ -39,7 +39,9 @@ public class OrderTest {
         orderPage.clickNextButton();
         orderPage.fillRentInfo("01.01.2025");
         orderPage.clickCreateOrderButton();
-//        orderPage.clickYesButton();
+        orderPage.clickYesButton();
+
+        assertTrue(orderPage.successStringIsDisplayed());
     }
 
     @After

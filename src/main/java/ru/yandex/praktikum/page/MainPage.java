@@ -10,10 +10,15 @@ import java.time.Duration;
 
 public class MainPage {
 private final WebDriver webDriver;
+// 'Статус заказа' button
 private By orderStatusLocator = By.xpath("//button[text()='Статус заказа']");
+// 'Введите номер заказа' input field
 private By orderNumberInputLocator = By.xpath("//input[@placeholder='Введите номер заказа']");
+// 'Go!' button
 private By goButtonLocator = By.xpath("//button[text()='Go!']");
+// 'Not found' image
 private By notFoundImageLocator = By.xpath("//img[@alt='Not found']");
+// 'Заказать' button in the header
 private By createOrderButtonLocator = By.xpath("//div[contains(@class, 'Header')]//button[text()='Заказать']");
 
 
@@ -48,6 +53,7 @@ private By createOrderButtonLocator = By.xpath("//div[contains(@class, 'Header')
         return notFoundImg.isDisplayed();
     }
 
+    // A method for createOrder test that stars from the MainPage
     public void clickCreateOrder() {
         WebElement createOrderButton  = webDriver.findElement(createOrderButtonLocator);
         createOrderButton.click();
