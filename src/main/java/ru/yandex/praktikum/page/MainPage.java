@@ -25,8 +25,9 @@ private final By notFoundImageLocator = By.xpath("//img[@alt='Not found']");
 private final By createOrderHeaderButtonLocator = By.xpath("//div[contains(@class, 'Header')]//button[text()='Заказать']");
 // 'Заказать' button in the bottom
 private final By createOrderBottomButtonLocator = By.xpath("//div[contains(@class, 'Header')]//button[text()='Заказать']");
-
+// Accordion question locator
 private final String questionLocator = "accordion__heading-%s";
+// Accordion answer locator
 private final String answerLocator = "//div[contains(@id, 'accordion__panel')][.='%s']";
 
 
@@ -74,20 +75,23 @@ private final String answerLocator = "//div[contains(@id, 'accordion__panel')][.
     }
 
     public void closeCookiesWindow() {
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(20));
         WebElement cookiesButton = wait.until(ExpectedConditions.elementToBeClickable(cookiesButtonLocator));
         cookiesButton.click();
     }
-
+// Accordion-related methods
     public void expandQuestion(int index) {
         WebElement element = webDriver.findElement(By.id(String.format(questionLocator, index)));
         ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView();", element);
-        new WebDriverWait(webDriver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(element));
+        new WebDriverWait(webDriver, Duration.ofSeconds(20)).until(ExpectedConditions.and(
+                ExpectedConditions.visibilityOf(element),
+                ExpectedConditions.elementToBeClickable(element)
+        ));
         element.click();
     }
 
     public boolean answerIsDisplayed(String expetedAnswer) {
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(20));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(answerLocator, expetedAnswer))));
         return element.isDisplayed();
     }

@@ -41,10 +41,11 @@ public class AccordionTest {
 
     @Before
     public void setup() {
-        webDriver = new FirefoxDriver();
+        webDriver = new ChromeDriver();
         webDriver.get("https://qa-scooter.praktikum-services.ru/");
     }
 
+    //Testing the Accordion panel
     @Test
     public void accodrionTest() {
         MainPage mainPage = new MainPage(webDriver);

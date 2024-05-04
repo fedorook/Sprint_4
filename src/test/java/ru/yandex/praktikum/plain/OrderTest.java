@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+//import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.yandex.praktikum.page.MainPage;
 import ru.yandex.praktikum.page.OrderPage;
 
@@ -15,10 +15,11 @@ public class OrderTest {
     private WebDriver webDriver;
     @Before
     public void setuo() {
-        webDriver = new FirefoxDriver();
+        webDriver = new ChromeDriver();
         webDriver.get("https://qa-scooter.praktikum-services.ru/");
     }
 
+    //Testing "Order not found" scenario
     @Test
     public void orderNotFound() {
         MainPage mainPage = new MainPage(webDriver);
@@ -29,6 +30,7 @@ public class OrderTest {
         assertTrue(mainPage.notFoundImageIsDisplayed());
     }
 
+    //Testing "Create order" scenario starting with the header button
     @Test
     public void createOrderFromHeader() {
         MainPage mainPage = new MainPage(webDriver);
@@ -44,6 +46,7 @@ public class OrderTest {
         assertTrue(orderPage.successStringIsDisplayed());
     }
 
+    //Testing "Create order" scenario starting with the bottom button
     @Test
     public void createOrderFromBottom() {
         MainPage mainPage = new MainPage(webDriver);
