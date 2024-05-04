@@ -1,6 +1,7 @@
 package ru.yandex.praktikum.page;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,17 +12,22 @@ import java.time.Duration;
 public class MainPage {
 private final WebDriver webDriver;
 // 'Статус заказа' button
-private By orderStatusLocator = By.xpath("//button[text()='Статус заказа']");
+private final By orderStatusLocator = By.xpath("//button[text()='Статус заказа']");
+// 'да все привыкли' cookies agreement button
+private final By cookiesButtonLocator = By.id("rcc-confirm-button");
 // 'Введите номер заказа' input field
-private By orderNumberInputLocator = By.xpath("//input[@placeholder='Введите номер заказа']");
+private final By orderNumberInputLocator = By.xpath("//input[@placeholder='Введите номер заказа']");
 // 'Go!' button
-private By goButtonLocator = By.xpath("//button[text()='Go!']");
+private final By goButtonLocator = By.xpath("//button[text()='Go!']");
 // 'Not found' image
-private By notFoundImageLocator = By.xpath("//img[@alt='Not found']");
+private final By notFoundImageLocator = By.xpath("//img[@alt='Not found']");
 // 'Заказать' button in the header
-private By createOrderButtonLocator = By.xpath("//div[contains(@class, 'Header')]//button[text()='Заказать']");
+private final By createOrderHeaderButtonLocator = By.xpath("//div[contains(@class, 'Header')]//button[text()='Заказать']");
+// 'Заказать' button in the bottom
+private final By createOrderBottomButtonLocator = By.xpath("//div[contains(@class, 'Header')]//button[text()='Заказать']");
 
-
+private final String questionLocator = "accordion__heading-%s";
+private final String answerLocator = "//div[contains(@id, 'accordion__panel')][.='%s']";
 
 
 
@@ -36,6 +42,8 @@ private By createOrderButtonLocator = By.xpath("//div[contains(@class, 'Header')
 
     public void enterOrderNumber(String orderNumber) {
         WebElement orderInput = webDriver.findElement(orderNumberInputLocator);
+        new WebDriverWait(webDriver,Duration.ofSeconds(5))
+                .until(ExpectedConditions.elementToBeClickable(orderInput));
         orderInput.sendKeys(orderNumber);
     }
 
@@ -53,9 +61,31 @@ private By createOrderButtonLocator = By.xpath("//div[contains(@class, 'Header')
         return notFoundImg.isDisplayed();
     }
 
-    // A method for createOrder test that stars from the MainPage
-    public void clickCreateOrder() {
-        WebElement createOrderButton  = webDriver.findElement(createOrderButtonLocator);
+    // A method for createOrder test starting from the Header order button
+    public void clickCreateOrderInHeader() {
+        WebElement createOrderButton  = webDriver.findElement(createOrderHeaderButtonLocator);
         createOrderButton.click();
+    }
+
+    // A method for createOrder test starting from the Bottom order button
+    public void clickCreateOrderInBottom() {
+        WebElement createOrderButton  = webDriver.findElement(createOrderBottomButtonLocator);
+        createOrderButton.click();
+    }
+
+    public void closeCookiesWindow() {
+        webDriver.findElement(cookiesButtonLocator).click();
+    }
+
+    public void expandQuestion(int index) {
+        WebElement element = webDriver.findElement(By.id(String.format(questionLocator, index)));
+        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView();", element);
+        new WebDriverWait(webDriver, Duration.ofSeconds(15)).until(ExpectedConditions.elementToBeClickable(element));
+        element.click();
+    }
+
+    public boolean answerIsDisplayed(String expetedAnswer) {
+        WebElement element = webDriver.findElement(By.xpath(String.format(answerLocator, expetedAnswer)));
+        return element.isDisplayed();
     }
 }

@@ -30,14 +30,29 @@ public class OrderTest {
     }
 
     @Test
-    public void createOrder() {
+    public void createOrderFromHeader() {
         MainPage mainPage = new MainPage(webDriver);
-        mainPage.clickCreateOrder();
+        mainPage.clickCreateOrderInHeader();
 
         OrderPage orderPage = new OrderPage(webDriver);
         orderPage.fillCustomerInfo("Имя", "Фамилия", "Адрес", "Арбатская", "89164887784");
         orderPage.clickNextButton();
         orderPage.fillRentInfo("01.01.2025");
+        orderPage.clickCreateOrderButton();
+        orderPage.clickYesButton();
+
+        assertTrue(orderPage.successStringIsDisplayed());
+    }
+
+    @Test
+    public void createOrderFromBottom() {
+        MainPage mainPage = new MainPage(webDriver);
+        mainPage.clickCreateOrderInBottom();
+
+        OrderPage orderPage = new OrderPage(webDriver);
+        orderPage.fillCustomerInfo("Сергей", "Иванов", "Соколово-Мещерская 6", "Планерная", "89160001234");
+        orderPage.clickNextButton();
+        orderPage.fillRentInfo("10.10.2024");
         orderPage.clickCreateOrderButton();
         orderPage.clickYesButton();
 

@@ -1,6 +1,10 @@
 package ru.yandex.praktikum.page;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class OrderPage {
     private final WebDriver webDriver;
@@ -50,9 +54,10 @@ public class OrderPage {
         WebElement subwayInput = webDriver.findElement(subwayInputLocator);
         subwayInput.click();
 
-        WebElement arbatskayaStationMenu = webDriver.findElement(By.xpath(String.format(stationMenuItemLocator, subwayTitle)));
-        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView();", arbatskayaStationMenu);
-        arbatskayaStationMenu.click();
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebElement stationMenu = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(stationMenuItemLocator, subwayTitle))));
+        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView();", stationMenu);
+        stationMenu.click();
 
 
         WebElement phoneInput = webDriver.findElement(phoneInputLocator);
