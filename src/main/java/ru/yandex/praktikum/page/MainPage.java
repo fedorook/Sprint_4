@@ -74,18 +74,21 @@ private final String answerLocator = "//div[contains(@id, 'accordion__panel')][.
     }
 
     public void closeCookiesWindow() {
-        webDriver.findElement(cookiesButtonLocator).click();
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebElement cookiesButton = wait.until(ExpectedConditions.elementToBeClickable(cookiesButtonLocator));
+        cookiesButton.click();
     }
 
     public void expandQuestion(int index) {
         WebElement element = webDriver.findElement(By.id(String.format(questionLocator, index)));
         ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView();", element);
-        new WebDriverWait(webDriver, Duration.ofSeconds(15)).until(ExpectedConditions.elementToBeClickable(element));
+        new WebDriverWait(webDriver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
 
     public boolean answerIsDisplayed(String expetedAnswer) {
-        WebElement element = webDriver.findElement(By.xpath(String.format(answerLocator, expetedAnswer)));
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(answerLocator, expetedAnswer))));
         return element.isDisplayed();
     }
 }
