@@ -7,14 +7,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.yandex.praktikum.page.MainPage;
 
 import static org.junit.Assert.assertTrue;
 import static ru.yandex.praktikum.page.MainPage.BASE_URL;
 
 @RunWith(Parameterized.class)
-public class AccordionTest {
+public class AccordionItemsTextTest {
 
     private WebDriver webDriver;
     private int index;
