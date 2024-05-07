@@ -10,13 +10,14 @@ import ru.yandex.praktikum.page.MainPage;
 import ru.yandex.praktikum.page.OrderPage;
 
 import static org.junit.Assert.assertTrue;
+import static ru.yandex.praktikum.page.MainPage.BASE_URL;
 
 public class OrderTest {
     private WebDriver webDriver;
     @Before
     public void setuo() {
         webDriver = new ChromeDriver();
-        webDriver.get("https://qa-scooter.praktikum-services.ru/");
+        webDriver.get(BASE_URL);
     }
 
     //Testing "Order not found" scenario

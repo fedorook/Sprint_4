@@ -11,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.yandex.praktikum.page.MainPage;
 
 import static org.junit.Assert.assertTrue;
+import static ru.yandex.praktikum.page.MainPage.BASE_URL;
 
 @RunWith(Parameterized.class)
 public class AccordionTest {
@@ -42,7 +43,7 @@ public class AccordionTest {
     @Before
     public void setup() {
         webDriver = new ChromeDriver();
-        webDriver.get("https://qa-scooter.praktikum-services.ru/");
+        webDriver.get(BASE_URL);
     }
 
     //Testing the Accordion panel

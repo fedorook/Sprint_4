@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class MainPage {
+// The base URL
+public static final String BASE_URL = "https://qa-scooter.praktikum-services.ru/";
 private final WebDriver webDriver;
 // 'Статус заказа' button
 private final By orderStatusLocator = By.xpath("//button[text()='Статус заказа']");
