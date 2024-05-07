@@ -20,7 +20,7 @@ public class AccordionItemsTextTest {
     private String answer;
 
 
-    public AccordionTest(int index, String answer) {
+    public AccordionItemsTextTest(int index, String answer) {
         this.index = index;
         this.answer = answer;
     }

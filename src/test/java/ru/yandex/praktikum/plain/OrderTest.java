@@ -35,6 +35,7 @@ public class OrderTest {
     @Test
     public void createOrderFromHeader() {
         MainPage mainPage = new MainPage(webDriver);
+        mainPage.closeCookiesWindow();
         mainPage.clickCreateOrderInHeader();
 
         OrderPage orderPage = new OrderPage(webDriver);
