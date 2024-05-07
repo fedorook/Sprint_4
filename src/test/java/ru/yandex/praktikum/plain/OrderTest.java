@@ -52,6 +52,7 @@ public class OrderTest {
     @Test
     public void createOrderFromBottom() {
         MainPage mainPage = new MainPage(webDriver);
+        mainPage.closeCookiesWindow();
         mainPage.clickCreateOrderInBottom();
 
         OrderPage orderPage = new OrderPage(webDriver);
