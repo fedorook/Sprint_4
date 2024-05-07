@@ -15,7 +15,7 @@ import static ru.yandex.praktikum.page.MainPage.BASE_URL;
 public class OrderTest {
     private WebDriver webDriver;
     @Before
-    public void setuo() {
+    public void setup() {
         webDriver = new ChromeDriver();
         webDriver.get(BASE_URL);
     }
